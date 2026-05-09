@@ -1,0 +1,47 @@
+name: Java CI
+
+on:
+  push:
+    paths:
+      - "application/**"
+      - ".github/workflows/java-ci.yml"
+  pull_request:
+    paths:
+      - "application/**"
+      - ".github/workflows/java-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build, test and analyse
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: application
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Java
+        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c3a4a7c6b0a5b5 # v4.7.0
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Run tests
+        run: mvn -B -q test
+
+      - name: SpotBugs static analysis
+        run: mvn -B spotbugs:check
+
+      - name: Upload SpotBugs report on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: spotbugs-report
+          path: application/target/spotbugsXml.xml

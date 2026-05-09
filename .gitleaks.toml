@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allowlisted paths"
+paths = [
+  '''.gitleaks.toml''',
+  '''website/scripts/test-auth.mjs''',
+  '''website/scripts/hash-admin-password.mjs''',
+]
