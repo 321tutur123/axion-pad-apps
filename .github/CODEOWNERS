@@ -1,9 +1,0 @@
-# Review obligatoire pour les zones sensibles
-.github/workflows/          @321tutur123
-website/src/app/api/auth/   @321tutur123
-website/src/app/api/admin/  @321tutur123
-website/src/app/api/webhook/ @321tutur123
-website/src/lib/admin-auth.ts @321tutur123
-website/src/lib/user-auth.ts  @321tutur123
-website/src/lib/csrf.ts       @321tutur123
-website/migrations/           @321tutur123
